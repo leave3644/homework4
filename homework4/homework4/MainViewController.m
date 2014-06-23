@@ -10,6 +10,8 @@
 
 @interface MainViewController ()
 - (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer;
+- (IBAction)handleNewsPan:(UIPanGestureRecognizer *)newsrecognizer;
+@property (assign, nonatomic) CGPoint originalLocation;
 
 
 @end
@@ -45,9 +47,10 @@
 
 - (IBAction)handlePan:(UIPanGestureRecognizer *)recognizer {
     CGPoint translation = [recognizer translationInView:self.view];
-    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
-                                         recognizer.view.center.y + translation.y);
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,recognizer.view.center.y + translation.y);
+    
     [recognizer setTranslation:CGPointMake(0, 0) inView:self.view];
+    
     if (recognizer.state == UIGestureRecognizerStateEnded) {
         
         CGPoint velocity = [recognizer velocityInView:self.view];
@@ -66,6 +69,38 @@
         } completion:nil];
         
     }
+     [self.view addGestureRecognizer:recognizer];
+    
+}
+
+- (IBAction)handleNewsPan:(UIPanGestureRecognizer *)newsrecognizer  {
+    CGPoint translation = [newsrecognizer translationInView:self.view];
+    newsrecognizer.view.center = CGPointMake(newsrecognizer.view.center.x + translation.x,newsrecognizer.view.center.y + translation.y);
+    
+    [newsrecognizer setTranslation:CGPointMake(0, 0) inView:self.view];
+    
+    if (newsrecognizer.state == UIGestureRecognizerStateEnded) {
+        
+        CGPoint velocity = [newsrecognizer velocityInView:self.view];
+        CGFloat magnitude = sqrtf((velocity.x * velocity.x) + (velocity.y * velocity.y));
+        CGFloat slideMult = magnitude / 200;
+        NSLog(@"magnitude: %f, slideMult: %f", magnitude, slideMult);
+        
+        float slideFactor = 0.1 * slideMult; // Increase for more of a slide
+        CGPoint finalPoint = CGPointMake(newsrecognizer.view.center.x + (velocity.x * slideFactor),
+                                         newsrecognizer.view.center.y + (velocity.y * slideFactor));
+        finalPoint.x = MIN(MAX(finalPoint.x, 0), self.view.bounds.size.width);
+        finalPoint.y = MIN(MAX(finalPoint.y, 0), self.view.bounds.size.height);
+        
+        [UIView animateWithDuration:slideFactor*2 delay:0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+            newsrecognizer.view.center = finalPoint;
+        } completion:nil];
+        
+    }
+    else if(newsrecognizer.state == UIGestureRecognizerStateBegan){
+        
+    }
+   
     
 }
 @end

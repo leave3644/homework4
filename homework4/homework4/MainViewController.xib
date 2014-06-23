@@ -28,6 +28,14 @@
                         <outletCollection property="gestureRecognizers" destination="Pn7-dW-O1K" appends="YES" id="a5u-hD-vv8"/>
                     </connections>
                 </imageView>
+                <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="news" id="p9m-I1-wDr">
+                    <rect key="frame" x="0.0" y="357" width="320" height="217"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <gestureRecognizers/>
+                    <connections>
+                        <outletCollection property="gestureRecognizers" destination="pge-wd-jKP" appends="YES" id="Ior-Vn-uGV"/>
+                    </connections>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
@@ -38,9 +46,15 @@
                 <action selector="handlePan:" destination="-1" id="Cjo-XD-Q3g"/>
             </connections>
         </panGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="pge-wd-jKP">
+            <connections>
+                <action selector="handleNewsPan:" destination="-1" id="FEn-L1-4rW"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
     <resources>
         <image name="headline" width="320" height="568"/>
         <image name="menu" width="320" height="568"/>
+        <image name="news" width="1444" height="253"/>
     </resources>
 </document>
