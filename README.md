@@ -14,6 +14,6 @@ Which required and optional stories have you completed?
     If you're dragging the headline up past the top, the friction should increase
 GIF walkthrough of all required and optional stories (using LICEcap)
 
-    you can find it in the sub folder
+    homework4.gif
 
 
