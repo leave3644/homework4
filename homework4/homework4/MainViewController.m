@@ -97,9 +97,9 @@
         } completion:nil];
         
     }
-    else if(newsrecognizer.state == UIGestureRecognizerStateBegan){
-        
-    }
+//    else if(newsrecognizer.state == UIGestureRecognizerStateBegan){
+//        
+//    }
    
     
 }
